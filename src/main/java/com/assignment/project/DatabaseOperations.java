@@ -147,4 +147,62 @@ public class DatabaseOperations {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
+
+    static void listAllCategories(String listallcategories){
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement(listallcategories);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                System.out.print("ID: " + rs.getInt("id"));
+                System.out.println(", Name: " + rs.getString("name"));
+            }
+
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DatabaseOperations.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    static void listAllBooks(String listallbooks){
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement(listallbooks);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                System.out.print("ID: " + rs.getInt("id"));
+                System.out.print(", Title: " + rs.getString("title"));
+                System.out.print(", Author: " + rs.getString("author"));
+                System.out.print(", Publisher: " + rs.getString("publisher"));
+                System.out.println(", Quantity: " + rs.getString("quantity"));
+            }
+
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DatabaseOperations.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    static void listAllBorrowing(String listallborrowing){
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement(listallborrowing);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                System.out.print("ID: " + rs.getInt("id"));
+                System.out.print(", Member Id: " + rs.getString("member_id"));
+                System.out.print(", Book Id: " + rs.getString("member_id"));
+                System.out.print(", Date Borrowed: " + rs.getString("book_id"));
+                System.out.print(", Due Borrowed: " + rs.getString("date_borrowed"));
+                System.out.println(", Return Date: " + rs.getString("return_date"));
+            }
+
+        } catch (SQLException ex) {
+
+            Logger lgr = Logger.getLogger(DatabaseOperations.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
 }
