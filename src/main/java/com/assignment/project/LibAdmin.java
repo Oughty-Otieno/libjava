@@ -2,6 +2,9 @@ package com.assignment.project;
 
 import static com.assignment.project.DatabaseOperations.listMembers;
 import static com.assignment.project.DatabaseOperations.insertClearBorrow;
+import static com.assignment.project.DatabaseOperations.listAllCategories;
+import static com.assignment.project.DatabaseOperations.listAllBooks;
+import static com.assignment.project.DatabaseOperations.listAllBorrowing;
 
 public class LibAdmin extends User implements ResourceOperations {
 
@@ -13,14 +16,16 @@ public class LibAdmin extends User implements ResourceOperations {
     }
 
     public static void main(String[] args) {
-        //clearBorrowing(3, "28-10-2024");
         //listlibMembers();
+        //listCategories();
+        //listBooks();
+        //listBorrowing();
+        //clearBorrowing(2, "28-10-2024");
         //createMember(4,"otieno@web", "password","Joshua", "member");
-        //createBook(1, "The art of War", "SUn Tzue", 4, 400, "Macmilan", 400);
-        //createCategory(1, "Politics");
+        //createBook(2, "The Prince", "Niccolo Machiavelli", 5, 400, "Macmilan", 400);
+        //createCategory(3, "Computing");
         //createBorrowing(3,4, 4, "31-10-2021", "15-11-2021", " ", true);
     }
-
 
     public static void createMember(int id, String email, String password, String name, String role) {
         LibMember newMember = new LibMember(id, email, password, name, role);
@@ -45,6 +50,21 @@ public class LibAdmin extends User implements ResourceOperations {
     public static void listlibMembers(){
         String listquery = "SELECT id, name, email  FROM users";
         listMembers(listquery);
+    }
+
+    public static void listCategories(){
+        String listcategoriesquery = "SELECT id, name FROM categories";
+        listAllCategories(listcategoriesquery);
+    }
+
+    public static void listBooks(){
+        String listbooksquery = "SELECT id, title, author, publisher, quantity FROM books";
+        listAllBooks(listbooksquery);
+    }
+
+    public static void listBorrowing(){
+        String listborrowingquery = "SELECT id, member_id, book_id, date_borrowed, due_date, return_date FROM borrowings";
+        listAllBorrowing(listborrowingquery);
     }
 
     public static void clearBorrowing(Integer id, String return_date){
